@@ -1,15 +1,3 @@
-// Напиши класс Storage, который будет создавать объекты для управления складом
-// товаров.
-// При вызове будет получать один аргумент - начальный массив товаров,
-//     и записывать его в свойство items.
-
-// Добавь методы класса:
-
-// getItems() - возвращает массив текущих товаров
-// addItem(item) - получает новый товар и добавляет его к текущим
-// removeItem(item) - получет товар и, если он есть, удаляет его из текущих
-
-
 class Storage {
   constructor(items) {
     this._items = items;
@@ -20,29 +8,18 @@ class Storage {
   }
 
   addItem(item) {
-    // if (this._items.includes(item)) return;
-
     this._items.push(item);
   }
 
-  removeItem(removedItem) {
-    const removedItemIndex = this._items.indexOf(removedItem);
+  removeItem(deletedItem) {
+    const newItems = [];
 
-    if (removedItemIndex === -1) return;
+    for (const item of this._items) {
+      if (item === deletedItem) continue;
 
-    this._items.splice(removedItemIndex, 1);
-    // const newItems = [];
-
-    // for (const item of this._items) {
-    //   if (item === removedItem) continue;
-
-    //   newItems.push(item);
-    // }
-
-    // this._items = newItems;
-
-    // const newItems = this._items.filter(item => item !== removedItem);
-    // this._items = newItems;
+      newItems.push(item);
+    }
+    this._items = newItems;
   }
 }
 
@@ -54,10 +31,10 @@ const storage = new Storage([
 ]);
 
 const items = storage.getItems();
-console.table(items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор" ]
+console.table(items); 
 
 storage.addItem('Дроид');
-console.table(storage.items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор", "Дроид" ]
+console.table(storage.getItems()); 
 
 storage.removeItem('Пролонгер');
-console.table(storage.items); // [ "Нанитоиды", "Железные жупи", "Антигравитатор", "Дроид" ]
+console.table(storage.getItems()); 
